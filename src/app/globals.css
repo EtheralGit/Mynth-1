@@ -2,32 +2,112 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+body {
+  margin: 0;
+  padding: 0;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
+.wrapper {
+  @apply w-full relative min-h-[600vh] overflow-hidden;
+  background: linear-gradient(
+    45deg,
+    #26541f,
+    #234d1d,
+    #1f451b,
+    #1f451b,
+    #1d3f19,
+    #1a3a17,
+    #173216,
+    #142a13,
+    #132713,
+    #13261a,
+    #132520,
+    #132526,
+    #152635,
+    #162544
+  );
+  background-attachment: fixed;
+  -webkit-overflow-scrolling: touch;
+}
+
+.particle {
+  position: fixed;
+  background-color: rgba(255, 255, 255, 0.5);
+  border-radius: 50%;
+  opacity: 0;
+  animation: moveParticles 5s linear infinite;
+}
+
+.road:nth-child(odd)::before,
+.road:nth-child(even)::before {
+  content: "";
+  background: #4bd03f;
+  width: 3em;
+  height: 3px;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.card::before {
+  content: "";
+  color: white;
+  background: #4bd03f;
+  width: 1.8em;
+  height: 1.8em;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  border-radius: 50%;
+  z: 20;
+}
+
+.labelCard {
+  width: 1.6em;
+  height: 1.6em;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  border-radius: 50%;
+  z: 20;
+}
+
+@keyframes moveParticles {
+  0% {
+    transform: translateY(100vh) scale(0);
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-100vh) scale(1);
+    opacity: 0;
   }
 }
 
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
-}
-
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
+@media screen and (max-width: 1364px) {
+  .road:nth-child(odd)::before,
+  .road:nth-child(even)::before {
+    width: 3px;
+    height: 4em;
+    top: -2em;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  .card::before {
+    top: -0.5em;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  .labelCard {
+    width: 1.6em;
+    height: 1.6em;
+    position: absolute;
+    top: -0.5em;
+    left: 50.5%;
+    transform: translateX(-50%);
+    border-radius: 50%;
+    z: 20;
   }
 }
